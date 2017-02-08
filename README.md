@@ -1,4 +1,4 @@
-![mistsofpandarialogo](https://fotos.subefotos.com/a5f0254127d1068aa74113a609b9cbcdo.png)
+![mistsofpandarialogo](https://fotos.subefotos.com/b23fd93d516ceeab320c6fc94cbac520o.png)
 
 | 7.x.x
 
