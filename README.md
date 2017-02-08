@@ -9,18 +9,22 @@ It is completely open source; community involvement is highly encouraged.
 
 ##Send Fixes
 
-Please send your fixes [Github pull requests](https://github.com/Ragebones/Legioncore/pulls).
+Please send your fixes [Github pull requests](https://github.com/Ragebones/Legioncore/pulls)
+
+## Release Files (if someone don´t know to compile)
+SOON
+
+## Full Database:
+SOON
 
  
 ## Client for this source can be fount here:
-
 SOON
 
 ## Dbc, Maps, Mmaps and Vmaps can be found here:
-
 SOON
 
-
+##
 If you want to join our team you can just open issue requesting an invite and we will add you.
 
 This is GPL-based source so do whatever you want with it.
