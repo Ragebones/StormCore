@@ -1,7 +1,5 @@
 ![mistsofpandarialogo](https://fotos.subefotos.com/b23fd93d516ceeab320c6fc94cbac520o.png)
 
-| 7.x.x
-
 ## Introduction
 LegionCore ProjecT™ is a MMORPG Framework based mostly in C++.
 It is completely open source; community involvement is highly encouraged.
