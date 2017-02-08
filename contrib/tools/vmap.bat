@@ -1,0 +1,4 @@
+vmap4extractor
+md vmaps
+vmap4assembler buildings vmaps
+pause

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<DBFilesClient>
+  <Table Name="BattlemasterList" Build="23222">
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+    <Field Name="m_Name" Type="string" />
+    <Field Name="m_IconFileDataID" Type="int" />
+    <Field Name="m_GameType" Type="string" />
+    <Field Name="m_MapID" Type="ushort" ArraySize="16" />
+    <Field Name="m_HolidayWorldState" Type="ushort" />
+    <Field Name="m_PlayerConditionID" Type="ushort" />
+    <Field Name="m_InstanceType" Type="byte" />
+    <Field Name="m_GroupsAllowed" Type="byte" />
+    <Field Name="m_MaxGroupSize" Type="byte" />
+    <Field Name="m_MinLevel" Type="byte" />
+    <Field Name="m_MaxLevel" Type="byte" />
+    <Field Name="m_RatedPlayers" Type="byte" />
+    <Field Name="m_MinPlayers" Type="byte" />
+    <Field Name="m_MaxPlayers" Type="byte" />
+    <Field Name="m_Flags" Type="byte" ArraySize="4" />
+  </Table>
+  <Table Name="Achievement" Build="23222">
+    <Field Name="m_Title" Type="string" />
+    <Field Name="m_Description" Type="string" />
+    <Field Name="m_Flags" Type="int" />
+    <Field Name="m_Reward" Type="string" />
+    <Field Name="m_MapID" Type="ushort" />
+    <Field Name="m_Supercedes" Type="ushort" />
+    <Field Name="m_Category" Type="ushort" />
+    <Field Name="m_UIOrder" Type="ushort" />
+    <Field Name="m_IconID" Type="ushort" />
+    <Field Name="m_SharesCriteria" Type="ushort" />
+    <Field Name="m_CriteriaTree" Type="ushort" />
+    <Field Name="m_Faction" Type="byte" />
+    <Field Name="m_Points" Type="byte" />
+    <Field Name="m_MinimumCriteria" Type="byte" />
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+  </Table>
+  <Table Name="AnimKit" Build="23222">
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+    <Field Name="m_OneShotDuration" Type="int" />
+    <Field Name="m_OneShotStopAnimKitID" Type="ushort" />
+    <Field Name="m_LowDefAnimKitID" Type="ushort" />
+  </Table>
+  <Table Name="AreaGroupMember" Build="23222">
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+    <Field Name="m_AreaGroupID" Type="ushort" />
+    <Field Name="m_AreaID" Type="ushort" />
+  </Table>
+  <Table Name="AreaTable" Build="23222">
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+    <Field Name="m_Flags" Type="int" ArraySize="2" />
+    <Field Name="m_ZoneName" Type="string" />
+    <Field Name="m_AmbientMultiplier" Type="float" />
+    <Field Name="m_AreaName" Type="string" />
+    <Field Name="m_ParentAreaID" Type="ushort" />
+    <Field Name="m_AreaBit" Type="ushort" />
+    <Field Name="m_AmbienceID" Type="ushort" />
+    <Field Name="m_ZoneMusic" Type="ushort" />
+    <Field Name="m_IntroSound" Type="ushort" />
+    <Field Name="m_LiquidTypeID" Type="ushort" />
+    <Field Name="m_UWZoneMusic" Type="ushort" ArraySize="4" />
+    <Field Name="m_UWAmbience" Type="ushort" />
+    <Field Name="m_PvPCombatWorldStateID" Type="ushort" />
+    <Field Name="m_SoundProviderPref" Type="ushort" />
+    <Field Name="m_SoundProviderPrefUnderwater" Type="byte" />
+    <Field Name="m_ExplorationLevel" Type="byte" />
+    <Field Name="m_FactionGroupMask" Type="byte" />
+    <Field Name="m_MountFlags" Type="byte" />
+    <Field Name="m_WildBattlePetLevelMin" Type="byte" />
+    <Field Name="m_WildBattlePetLevelMax" Type="byte" />
+    <Field Name="m_WindSettingsID" Type="byte" />
+    <Field Name="m_UWIntroSound" Type="byte" />
+    <Field Name="m_unk_7.x.x" Type="byte" ArraySize="2" />
+  </Table>
+  <Table Name="AreaTrigger" Build="23222">
+    <Field Name="field00" Type="int" ArraySize="3" />
+    <Field Name="m_Radius" Type="float" />
+    <Field Name="m_BoxLength" Type="float" />
+    <Field Name="m_BoxWidth" Type="float" />
+    <Field Name="m_BoxHeight" Type="float" />
+    <Field Name="m_BoxYaw" Type="float" />
+    <Field Name="m_MapID" Type="ushort" />
+    <Field Name="m_PhaseID" Type="ushort" />
+    <Field Name="m_PhaseGroupID" Type="ushort" />
+    <Field Name="m_ShapeID" Type="ushort" />
+    <Field Name="m_AreaTriggerActionSetID" Type="ushort" />
+    <Field Name="m_PhaseUseFlags" Type="byte" />
+    <Field Name="m_ShapeType" Type="byte" />
+    <Field Name="m_Flag" Type="byte" />
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+  </Table>
+  <Table Name="ArmorLocation" Build="23222">
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+    <Field Name="m_Modifier1" Type="float" />
+    <Field Name="m_Modifier2" Type="float" />
+    <Field Name="m_Modifier3" Type="float" />
+    <Field Name="m_Modifier4" Type="float" />
+    <Field Name="m_Modifier5" Type="float" />
+  </Table>
+  <Table Name="Scenario" Build="23360">
+    <Field Name="m_ID" Type="int" IsIndex="true" />
+    <Field Name="m_Name" Type="string" />
+    <Field Name="m_Data" Type="ushort" />
+    <Field Name="m_Flag" Type="byte" />
+    <Field Name="m_Type" Type="byte" />
+  </Table>
+</DBFilesClient>
