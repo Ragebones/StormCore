@@ -1,19 +1,19 @@
 /*
- * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (C) 2014-2017 StormCore
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /**
 * @file main.cpp
@@ -48,8 +48,8 @@ namespace fs = boost::filesystem;
 #if PLATFORM == PLATFORM_WINDOWS
 #include "ServiceWin32.h"
 char serviceName[] = "bnetserver";
-char serviceLongName[] = "Legioncore bnet service";
-char serviceDescription[] = "Legioncore Battle.net emulator authentication service";
+char serviceLongName[] = "StormCore bnet service";
+char serviceDescription[] = "StormCore Battle.net emulator authentication service";
 /*
 * -1 - not in service mode
 *  0 - stopped
@@ -116,8 +116,9 @@ int main(int argc, char** argv)
         },
             []()
         {
-			TC_LOG_INFO("server.bnetserver", "Project Legioncore 2014-2016(c) Legion Patch 7.1.0.23222");
-			TC_LOG_INFO("server.bnetserver", "Website: Wodcore.es");
+		    TC_LOG_INFO("server.bnetserver", "Project StormCore 2014-2017(c) Legion Patch 7.1.5");
+			TC_LOG_INFO("server.bnetserver", "Repository: https://github.com/Ragebones/StormCore");
+			TC_LOG_INFO("server.bnetserver", "Copyright: StormCore");
             TC_LOG_INFO("server.bnetserver", "Using configuration file %s.", sConfigMgr->GetFilename().c_str());
             TC_LOG_INFO("server.bnetserver", "Using SSL version: %s (library: %s)", OPENSSL_VERSION_TEXT, SSLeay_version(SSLEAY_VERSION));
             TC_LOG_INFO("server.bnetserver", "Using Boost version: %i.%i.%i", BOOST_VERSION / 100000, BOOST_VERSION / 100 % 1000, BOOST_VERSION % 100);
