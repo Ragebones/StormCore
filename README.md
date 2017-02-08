@@ -1,4 +1,4 @@
-![mistsofpandarialogo](http://eu.battle.net/wow/static/images/seven-oh/logo.png)
+![mistsofpandarialogo](https://fotos.subefotos.com/a5f0254127d1068aa74113a609b9cbcdo.png)
 
 | 7.x.x
 
