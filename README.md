@@ -1,7 +1,7 @@
 ![mistsofpandarialogo](https://fotos.subefotos.com/b23fd93d516ceeab320c6fc94cbac520o.png)
 
 ## Introduction
-LegionCore ProjecT™ is a MMORPG Framework based mostly in C++.
+StormCore ProjecT™ is a MMORPG Framework based mostly in C++.
 It is completely open source; community involvement is highly encouraged.
 
 ##Report Issues
