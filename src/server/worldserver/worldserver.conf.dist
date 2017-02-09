@@ -802,7 +802,7 @@ CharactersPerRealm = 12
 #        Range:       1-12
 #        Default:     1
 
-HeroicCharactersPerRealm = 1
+HeroicCharactersPerRealm = 12
 
 #
 #    CharacterCreating.MinLevelForHeroicCharacter
@@ -812,7 +812,7 @@ HeroicCharactersPerRealm = 1
 #                     0  - (Disabled)
 #                     1  - (Enabled, Requires at least another level 1 character)
 
-CharacterCreating.MinLevelForHeroicCharacter = 55
+CharacterCreating.MinLevelForHeroicCharacter = 1
 
 #
 #    DemonHuntersPerRealm
