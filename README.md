@@ -15,7 +15,7 @@ It is completely open source; community involvement is highly encouraged.
 Please send your fixes [Github pull requests](https://github.com/Ragebones/Legioncore/pulls)
 
 ## Repack Files (if someone don´t know to compile)
-https://mega.nz/#!XlIGBDKB!0v-fqYmQ4EZweyMButjO6XZkLzpfKD6Yc7t94kKn0qw
+https://mega.nz/#!u1JSSa6A!0Z97QY4s-M_w-YtK5CinKHtpOTXtYzfgeQrmfCsy-2s
 
 ## Full Database:
 https://mega.nz/#!jx41ETYZ!jU31-znbBKYoWGx9BOul0Cr6DtTvIerNFga2QF2fluc
