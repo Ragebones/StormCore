@@ -7,13 +7,13 @@ It is completely open source; community involvement is highly encouraged.
 ## Default Account: username: legion@legion password: legion@legion
 ## Account creation command: .bnetaccount Create email password
 
-## Repack Files (if someone don´t know to compile)
+## Repack Files (if someone don´t know to compile) We update it every day
 https://mega.nz/#!mtAXGDhY!6_m0hXnZoSwfBJC3CJMpvYuVlkqdpdF9RncsSg7SL1Y
 
 ## Full Database: We update it every day
 https://mega.nz/#!jx41ETYZ!jU31-znbBKYoWGx9BOul0Cr6DtTvIerNFga2QF2fluc
 
-## Client for this source can be fount here: We update it every day
+## Client for this source can be fount here:
 https://mega.nz/#!61YSUAqT!NEhx5EJqE5asf3IGRV23VgGOVraB8aQomn7u0sKH2ow
 
 ## Dbc, Maps, Mmaps and Vmaps can be found here:
