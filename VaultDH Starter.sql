@@ -1,0 +1,15 @@
+insert into `creature_queststarter` (`id`, `quest`) values('92718','38672');
+insert into `creature_queststarter` (`id`, `quest`) values('92986','38689');
+insert into `creature_queststarter` (`id`, `quest`) values('92980','38690');
+insert into `creature_queststarter` (`id`, `quest`) values('92718','40253');
+insert into `creature_queststarter` (`id`, `quest`) values('92718','38723');
+insert into `creature_queststarter` (`id`, `quest`) values('96665','39682');
+insert into `creature_queststarter` (`id`, `quest`) values('96675','39683');
+insert into `creature_queststarter` (`id`, `quest`) values('97643','39684');
+insert into `creature_queststarter` (`id`, `quest`) values('97643','39685');
+insert into `creature_queststarter` (`id`, `quest`) values('96675','39686');
+insert into `creature_queststarter` (`id`, `quest`) values('97644','40373');
+insert into `creature_queststarter` (`id`, `quest`) values('97644','39688');
+insert into `creature_queststarter` (`id`, `quest`) values('97978','39690');
+insert into `creature_queststarter` (`id`, `quest`) values('97644','39694');
+insert into `creature_queststarter` (`id`, `quest`) values('97978','39689');

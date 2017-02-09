@@ -1,0 +1,3 @@
+INSERT INTO `gameobject` (`guid`, `id`, `map`, `zoneId`, `areaId`, `spawnMask`, `PhaseId`, `PhaseGroup`, `position_x`, `position_y`, `position_z`, `orientation`, `rotation0`, `rotation1`, `rotation2`, `rotation3`, `spawntimesecs`, `animprogress`, `state`, `VerifiedBuild`) VALUES
+(@OGUID+0,'215424','0','0','0','1','0','0','-8194.56','529.487','117.416','0.657535','0','0','0.322877','0.946441','300','0','1','0'),
+(@OGUID+1,'215457','1','0','0','1','0','0','2015.98','-4702.22','28.6651','3.51698','0','0','0.982437','-0.186593','300','0','1','0');

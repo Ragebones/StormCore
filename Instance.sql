@@ -1,0 +1,12 @@
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1001','0','instance_scarlet_halls','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1004','0','instance_scarlet_monastery','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1007','0','instance_scholomance','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1098','1064','instance_throne_of_thunder','1');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1136','0','instance_siege_of_orgrimmar','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1268','0','scenario_xandros','1');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1448','1116','','1');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1492','0','','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1520','530','instance_emerald_nightmare','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1530','0','instance_nighthold','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1648','0','instance_trial_of_valor','0');
+insert into `instance_template` (`map`, `parent`, `script`, `allowMount`) values('1651','530','instance_return_to_karazhan','0');

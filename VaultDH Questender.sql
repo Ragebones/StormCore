@@ -1,0 +1,16 @@
+insert into `gameobject_questender` (`id`, `quest`) values('244923','38672');
+insert into `creature_questender` (`id`, `quest`) values('92986','38689');
+insert into `creature_questender` (`id`, `quest`) values('96665','38690');
+insert into `creature_questender` (`id`, `quest`) values('96665','40253');
+insert into `creature_questender` (`id`, `quest`) values('96665','38723');
+insert into `creature_questender` (`id`, `quest`) values('97643','39682');
+insert into `creature_questender` (`id`, `quest`) values('96675','39683');
+insert into `creature_questender` (`id`, `quest`) values('96675','39684');
+insert into `creature_questender` (`id`, `quest`) values('96675','39685');
+insert into `creature_questender` (`id`, `quest`) values('97644','39686');
+insert into `creature_questender` (`id`, `quest`) values('97644','40373');
+insert into `creature_questender` (`id`, `quest`) values('96666','39688');
+insert into `creature_questender` (`id`, `quest`) values('96669','39688');
+insert into `creature_questender` (`id`, `quest`) values('97978','39690');
+insert into `creature_questender` (`id`, `quest`) values('96666','39694');
+insert into `creature_questender` (`id`, `quest`) values('96669','39694');

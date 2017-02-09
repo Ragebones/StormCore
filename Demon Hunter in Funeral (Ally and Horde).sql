@@ -1,0 +1,17 @@
+insert into `creature_queststarter` (`id`, `quest`) values('102585','44471');
+insert into `creature_questender` (`id`, `quest`) values('102585','44471');
+insert into `creature_queststarter` (`id`, `quest`) values('102585','44463');
+insert into `creature_questender` (`id`, `quest`) values('100973','44463');
+insert into `creature_queststarter` (`id`, `quest`) values('100873','40982');
+insert into `creature_questender` (`id`, `quest`) values('100873','40982');
+insert into `creature_queststarter` (`id`, `quest`) values('100873','40983');
+insert into `creature_questender` (`id`, `quest`) values('101035','40983');
+insert into `creature_queststarter` (`id`, `quest`) values('97296','39691');
+insert into `creature_questender` (`id`, `quest`) values('102585','39691');
+insert into `creature_queststarter` (`id`, `quest`) values('97296','40976');
+insert into `creature_questender` (`id`, `quest`) values('100873','40976');
+insert into `creature_queststarter` (`id`, `quest`) values('100873','40607');
+insert into `creature_queststarter` (`id`, `quest`) values('101035','41002');
+insert into `creature_questender` (`id`, `quest`) values('95234','41002');
+insert into `creature_queststarter` (`id`, `quest`) values('100973','44473');
+insert into `creature_questender` (`id`, `quest`) values('101004','44473');
