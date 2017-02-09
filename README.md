@@ -18,9 +18,8 @@ Please send your fixes [Github pull requests](https://github.com/Ragebones/Legio
 https://mega.nz/#!XlIGBDKB!0v-fqYmQ4EZweyMButjO6XZkLzpfKD6Yc7t94kKn0qw
 
 ## Full Database:
-SOON
+https://mega.nz/#!jx41ETYZ!jU31-znbBKYoWGx9BOul0Cr6DtTvIerNFga2QF2fluc
 
- 
 ## Client for this source can be fount here:
 https://mega.nz/#!61YSUAqT!NEhx5EJqE5asf3IGRV23VgGOVraB8aQomn7u0sKH2ow
 
