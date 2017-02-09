@@ -29,6 +29,7 @@
 
 enum WarriorSpells
 {
+	SPELL_WARRIOR_BATTLE_CRY                    = 1719,
 	SPELL_WARRIOR_BLADESTORM_PERIODIC_WHIRLWIND = 50622,
 	SPELL_WARRIOR_BLOODTHIRST_HEAL = 117313,
 	SPELL_WARRIOR_BLOODTHIRST_DAMAGE = 23881,
@@ -85,6 +86,51 @@ enum MiscSpells
 	SPELL_PALADIN_GREATER_BLESSING_OF_SANCTUARY = 25899,
 	SPELL_PRIEST_RENEWED_HOPE = 63944
 };
+
+
+// 152278 - Anger Management
+// Updated 7.1.5
+class spell_warr_anger_management : public SpellScriptLoader
+{
+public:
+    spell_warr_anger_management() : SpellScriptLoader("spell_warr_anger_management") { }
+	
+	class spell_warr_anger_management_AuraScript : public AuraScript
+	{
+		PrepareAuraScript(spell_warr_anger_management_AuraScript);
+		
+		bool Validate(SpellInfo const* /*spellInfo*/) override
+		{
+			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_BATTLE_CRY))
+				return false;
+			return true;
+		}
+		
+		void HandleEffectProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+		{
+			PreventDefaultAction();
+			if (Unit* caster = GetCaster())
+			{
+				SpellInfo const* spellInfo = eventInfo.GetDamageInfo()->GetSpellInfo();
+				std::vector<SpellInfo::CostData> costs = spellInfo->CalcPowerCost(GetTarget(), SpellSchoolMask(eventInfo.GetDamageInfo()->GetSchoolMask()));
+				auto m = std::find_if(costs.begin(), costs.end(), [](SpellInfo::CostData const& cost) { return cost.Power == POWER_RAGE; });
+				if (m != costs.end())
+					if (m->Amount >= 10)
+						caster->GetSpellHistory()->ModifyCooldown(SPELL_WARRIOR_BATTLE_CRY, -1 * IN_MILLISECONDS);
+					}
+				}
+				
+				void Register() override
+				{
+					OnEffectProc += AuraEffectProcFn(spell_warr_anger_management_AuraScript::HandleEffectProc, EFFECT_0, SPELL_AURA_DUMMY);
+				}
+			};
+			
+			AuraScript* GetAuraScript() const override
+			{
+				return new spell_warr_anger_management_AuraScript();
+				}
+			};
 
 // 23881 - Bloodthirst 
 // Updated 7.1.5
@@ -436,6 +482,34 @@ public:
 	}
 };
 
+
+class spell_warr_ravager : public SpellScriptLoader
+{
+public:
+    spell_warr_ravager() : SpellScriptLoader("spell_warr_ravager") { }
+	
+	class spell_warr_ravager_SpellScript : public SpellScript
+	{
+		PrepareSpellScript(spell_warr_ravager_SpellScript);
+		
+		void HandleDummy(SpellEffIndex /*effIndex*/)
+		{
+			if (WorldLocation const* dest = GetExplTargetDest())
+				GetCaster()->CastSpell(dest->GetPositionX(), dest->GetPositionY(), dest->GetPositionZ(), 227876, true);
+		}
+		
+		void Register() override
+		{
+			OnEffectHit += SpellEffectFn(spell_warr_ravager_SpellScript::HandleDummy, EFFECT_1, SPELL_EFFECT_DUMMY);
+		}
+	};
+	
+	SpellScript* GetSpellScript() const override
+	{
+		return new spell_warr_ravager_SpellScript();
+	}
+ };
+	
 // 94009 - Rend
 class spell_warr_rend : public SpellScriptLoader
 {
@@ -1080,6 +1154,7 @@ public:
 
 void AddSC_warrior_spell_scripts()
 {
+	new spell_warr_anger_management();
 	new spell_warr_bloodthirst();
 	new spell_warr_charge();
 	new spell_warr_concussion_blow();
@@ -1090,6 +1165,7 @@ void AddSC_warrior_spell_scripts()
 	new spell_warr_last_stand();
 	new spell_warr_overpower();
 	new spell_warr_rallying_cry();
+	new spell_warr_ravager();
 	new spell_warr_rend();
 	new spell_warr_retaliation();
 	new spell_warr_second_wind_proc();
