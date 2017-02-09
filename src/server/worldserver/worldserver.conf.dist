@@ -1,6 +1,6 @@
-#############################################
+################################################
 # StormCore World Server configuration file #
-#############################################
+################################################
 [worldserver]
 
 ###################################################################################################
@@ -70,10 +70,10 @@ RealmID = 1
 #    DataDir
 #        Description: Data directory setting.
 #        Important:   DataDir needs to be quoted, as the string might contain space characters.
-#        Example:     "@prefix@/share/Stormcore"
+#        Example:     "@prefix@/share/trinitycore"
 #        Default:     "."
 
-DataDir = "data"
+DataDir = "."
 
 #
 #    LogsDir
@@ -82,7 +82,7 @@ DataDir = "data"
 #                     Logs directory must exists, or log file creation will be disabled.
 #        Default:     "" - (Log files will be stored in the current path)
 
-LogsDir = "logs"
+LogsDir = ""
 
 #
 #    LoginDatabaseInfo
@@ -201,20 +201,19 @@ CMakeCommand  = ""
 #    BuildDirectory
 #        Description: The path to your build directory.
 #                     If the path is left empty, the built-in CMAKE_BINARY_DIR is used.
-#        Example:     "../Stormcore"
+#        Example:     "../TrinityCore"
 #        Default:     ""
 
 BuildDirectory  = ""
 
 #
 #    SourceDirectory
-#        Description: The path to your Stormcore source directory.
+#        Description: The path to your TrinityCore source directory.
 #                     If the path is left empty, the built-in CMAKE_SOURCE_DIR is used.
-#        Example:     "../Stormcore"
+#        Example:     "../TrinityCore"
 #        Default:     ""
 
-SourceDirectory  = ""
-
+SourceDirectory  = "" 
 #
 #    MySQLExecutable
 #        Description: The path to your mysql cli binary.
@@ -373,7 +372,7 @@ PlayerSaveInterval = 90000
 #        Default:     0  - (Disabled, Do not save character stats)
 #                     1+ - (Enabled, Level beyond which character stats are saved)
 
-PlayerSave.Stats.MinLevel = 1
+PlayerSave.Stats.MinLevel = 0
 
 #
 #    PlayerSave.Stats.SaveOnlyOnLogout
@@ -396,7 +395,7 @@ DisconnectToleranceInterval = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-mmap.enablePathFinding = 1
+mmap.enablePathFinding = 0
 
 #
 #    vmap.enableLOS
@@ -611,7 +610,7 @@ RealmZone = 1
 #                         placed in clientdir/Fonts.
 #                     3 - (Enabled, Basic Latin characters + server timezone specific)
 
-StrictPlayerNames = 1
+StrictPlayerNames = 0
 
 #
 #    StrictCharterNames
@@ -846,11 +845,11 @@ SkipCinematics = 0
 #
 #    MaxPlayerLevel
 #        Description: Maximum level that can be reached by players.
-#        Important:   Levels beyond 110 are not recommended at all.
+#        Important:   Levels beyond 100 are not recommended at all.
 #        Range:       1-255
-#        Default:     110
+#        Default:     100
 
-MaxPlayerLevel = 110
+MaxPlayerLevel = 100
 
 #
 #    MinDualSpecLevel
@@ -1174,10 +1173,10 @@ BeepAtStart = 1
 #
 #    Motd
 #        Description: Message of the Day, displayed at login. Use '@' for a newline.
-#        Example:     "Welcome to John's Server!@This server is proud to be powered by Stormcore."
-#        Default:     "Welcome to a Stormcore server."
+#        Example:     "Welcome to John's Server!@This server is proud to be powered by Trinity Core."
+#        Default:     "Welcome to a Trinity Core server."
 
-Motd = "Welcome to Stormcore 7.x.x"
+Motd = "Welcome to StormCore 7.x.x"
 
 #
 #    Server.LoginInfo
@@ -1232,7 +1231,7 @@ Account.PasswordChangeSecurity = 0
 #
 #   BirthdayTime
 #        Description: Set to date of project's birth in UNIX time. By default the date when
-#                     StormCore was started (Thu Oct 2, 2008)
+#                     TrinityCore was started (Thu Oct 2, 2008)
 #        Default:     1222964635
 
 BirthdayTime = 1222964635
@@ -1279,7 +1278,7 @@ FeatureSystem.CharacterUndelete.Cooldown = 2592000
 #                     4  - (Enable world only)
 #                     0  - (All Disabled)
 
-Updates.EnableDatabases = 0
+Updates.EnableDatabases = 15
 
 #
 #    Updates.AutoSetup
@@ -1287,7 +1286,7 @@ Updates.EnableDatabases = 0
 #        Default:     1 - (Enabled)
 #                     0 - (Disabled)
 
-Updates.AutoSetup   = 0
+Updates.AutoSetup   = 1
 
 #
 #    Updates.Redundancy
@@ -1296,7 +1295,7 @@ Updates.AutoSetup   = 0
 #        Default:     1 - (Enabled)
 #                     0 - (Disabled)
 
-Updates.Redundancy  = 0
+Updates.Redundancy  = 1
 
 #
 #    Updates.ArchivedRedundancy
@@ -1313,7 +1312,7 @@ Updates.ArchivedRedundancy = 0
 #        Default:     1 - (Enabled)
 #                     0 - (Disabled)
 
-Updates.AllowRehash = 0
+Updates.AllowRehash = 1
 
 #
 #    Updates.CleanDeadRefMaxCount
@@ -1325,7 +1324,7 @@ Updates.AllowRehash = 0
 #                     0 - (Disabled)
 #                    -1 - (Enabled - unlimited)
 
-Updates.CleanDeadRefMaxCount = 0
+Updates.CleanDeadRefMaxCount = 3
 
 #
 ###################################################################################################
@@ -1947,7 +1946,7 @@ Support.Enabled = 1
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled, Experimental)
 
-Support.TicketsEnabled = 0
+Support.TicketsEnabled = 1
 
 #
 #    Support.BugsEnabled
@@ -1955,7 +1954,7 @@ Support.TicketsEnabled = 0
 #        Default:    0 - (Disabled)
 #                    1 - (Enabled, Experimental)
 
-Support.BugsEnabled = 0
+Support.BugsEnabled = 1
 
 #
 #    Support.ComplaintsEnabled
@@ -1963,7 +1962,7 @@ Support.BugsEnabled = 0
 #        Default:    0 - (Disabled)
 #                    1 - (Enabled, Experimental)
 
-Support.ComplaintsEnabled = 0
+Support.ComplaintsEnabled = 1
 
 #
 #    Support.SuggestionsEnabled
@@ -1971,7 +1970,7 @@ Support.ComplaintsEnabled = 0
 #        Default:    0 - (Disabled)
 #                    1 - (Enabled, Experimental)
 
-Support.SuggestionsEnabled = 0
+Support.SuggestionsEnabled = 1
 
 #
 ###################################################################################################
@@ -2387,7 +2386,7 @@ Stats.Limits.Crit  = 95.0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-AutoBroadcast.On = 0
+AutoBroadcast.On = 1
 
 #
 #    AutoBroadcast.Center
@@ -2731,6 +2730,7 @@ Arena.ArenaWinRatingModifier1 = 48
 
 Arena.ArenaWinRatingModifier2 = 24
 
+
 #
 #    Arena.ArenaLoseRatingModifier
 #        Description: Modifier of rating subtraction for loser team
@@ -3030,7 +3030,7 @@ Guild.AllowMultipleGuildMaster = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ShowKickInWorld = 0
+ShowKickInWorld = 1
 
 #     ShowMuteInWorld
 #        Description: Determines whether a message is broadcasted to the entire server when a
@@ -3038,7 +3038,7 @@ ShowKickInWorld = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ShowMuteInWorld = 0
+ShowMuteInWorld = 1
 
 #
 #     ShowBanInWorld
@@ -3047,7 +3047,7 @@ ShowMuteInWorld = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-ShowBanInWorld = 0
+ShowBanInWorld = 1
 
 #
 #     RecordUpdateTimeDiffInterval
@@ -3778,7 +3778,6 @@ Logger.mmaps=3,Server
 #Logger.condition=3,Console Server
 #Logger.criteria=3,Console Server
 #Logger.criteria.achievement=3,Console Server
-#Logger.entities.areatrigger=3,Console Server
 #Logger.entities.pet=3,Console Server
 #Logger.entities.player.character=3,Console Server
 #Logger.entities.player.dump=3,Console Server
@@ -3860,6 +3859,22 @@ Currency.ResetDay = 3
 Currency.ResetHour = 6
 
 #
+#    Currency.StartHonorPoints
+#        Amount of honor points that new players will start with
+#        Default: 0 (with precision)
+#
+
+Currency.StartHonorPoints = 0
+
+#
+#    Currency.MaxHonorPoints
+#        Amount honor points a player can have
+#        Default: 4000
+#
+
+Currency.MaxHonorPoints = 4000
+
+#
 #    Currency.StartApexisCrystals
 #        Amount of Apexis Crystals that new players will start with
 #        Default: 0 (with precision)
@@ -3890,6 +3905,30 @@ Currency.StartJusticePoints = 0
 #
 
 Currency.MaxJusticePoints = 4000
+
+#
+#    Currency.StartConquestPoints
+#        Amount of conquest points that new players will start with
+#        Default: 0 (with precision)
+#
+
+Currency.StartConquestPoints = 0
+
+#
+#    Currency.ConquestPointsWeekCap
+#        Amount of conquest points that player can earn per week
+#        Default: 1350
+#
+
+Currency.ConquestPointsWeekCap = 1350
+
+#
+#    Currency.ConquestPointsArenaReward
+#        Amount of conquest points rewarded by winning arenas
+#        Default: 180
+#
+
+Currency.ConquestPointsArenaReward = 180
 
 #
 ###################################################################################################
