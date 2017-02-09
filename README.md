@@ -4,6 +4,9 @@
 StormCore ProjecT™ is a MMORPG Framework based mostly in C++.
 It is completely open source; community involvement is highly encouraged.
 
+Default Account: username: legion@legion password: legion@legion
+Account creation command: .bnetaccount Create email password
+
 ##Report Issues
 -Please Report Issues [Github issue tracker](https://github.com/Ragebones/Legioncore/issues).
 
