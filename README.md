@@ -12,7 +12,7 @@ It is completely open source; community involvement is highly encouraged.
 Please send your fixes [Github pull requests](https://github.com/Ragebones/Legioncore/pulls)
 
 ## Release Files (if someone don´t know to compile)
-SOON
+https://mega.nz/#!XlIGBDKB!0v-fqYmQ4EZweyMButjO6XZkLzpfKD6Yc7t94kKn0qw
 
 ## Full Database:
 SOON
