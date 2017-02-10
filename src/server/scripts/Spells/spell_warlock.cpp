@@ -321,6 +321,40 @@ class spell_warl_bane_of_doom : public SpellScriptLoader
         }
 };
 
+// 198590 - Drain Soul
+/// Updated 7.1.5
+class spell_warl_drain_soul : public SpellScriptLoader
+{
+	public:
+	    spell_warl_drain_soul() : SpellScriptLoader("spell_warl_drain_soul") { }
+		
+		class spell_warl_drain_soul_AuraScript : public AuraScript
+		{
+			PrepareAuraScript(spell_warl_drain_soul_AuraScript);
+			
+			void OnPeriodic(AuraEffect const* aurEff)
+			{
+				if (Unit* caster = GetCaster())
+				{
+					int32 damage = aurEff->GetDamage();
+					if (Aura* drainSoul = GetTarget()->GetAura(GetId()))
+						drainSoul->GetEffect(EFFECT_0)->ChangeAmount(damage);
+					damage *= 2;
+				}
+			}
+			
+			void Register() override
+			{
+				OnEffectPeriodic += AuraEffectPeriodicFn(spell_warl_drain_soul_AuraScript::OnPeriodic, EFFECT_0, SPELL_AURA_PERIODIC_LEECH);
+			}
+		};
+		
+		AuraScript* GetAuraScript() const override
+		{
+			return new spell_warl_drain_soul_AuraScript();
+		}
+	};
+			
 // 48018 - Demonic Circle: Summon
 /// Updated 4.3.4
 class spell_warl_demonic_circle_summon : public SpellScriptLoader
@@ -1508,6 +1542,7 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_banish();
     new spell_warl_conflagrate();
     new spell_warl_create_healthstone();
+	new spell_warl_drain_soul();
     new spell_warl_demonic_circle_summon();
     new spell_warl_demonic_circle_teleport();
     new spell_warl_demonic_empowerment();
