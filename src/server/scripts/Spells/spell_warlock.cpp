@@ -245,6 +245,34 @@ class spell_warl_create_healthstone : public SpellScriptLoader
         }
 };
 
+// 6262 - Healthstone
+class spell_warl_healthstone : public SpellScriptLoader
+{
+	public:
+	      spell_warl_healthstone() : SpellScriptLoader("spell_warl_healthstone") { }
+		  
+		class spell_warl_healthstone_SpellScript : public SpellScript
+		{
+			PrepareSpellScript(spell_warl_healthstone_SpellScript);
+			
+			void HandleHitTarget(SpellEffIndex /*effIndex*/)
+			{
+				if (Unit* caster = GetCaster())
+					    caster->HealBySpell(caster, GetSpellInfo(), GetEffectValue());
+			}
+			
+			void Register() override
+			{
+				OnEffectHitTarget += SpellEffectFn(spell_warl_healthstone_SpellScript::HandleHitTarget, EFFECT_0, SPELL_EFFECT_HEAL);
+			}
+		};
+		
+		SpellScript* GetSpellScript() const override
+		{
+			return new spell_warl_healthstone_SpellScript();
+		}
+ };
+ 
 // 603 - Bane of Doom
 /// Updated 4.3.4
 class spell_warl_bane_of_doom : public SpellScriptLoader
