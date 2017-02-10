@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2017 StormCore
+ * Copyright (C) 2014-2017 StormCore (credits:zydrax)
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1785,6 +1785,10 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
 
     ShapeshiftForm form = ShapeshiftForm(GetMiscValue());
     uint32 modelid = target->GetModelForForm(form);
+	
+	// called by playerscript for travel form
+	if (target->GetTypeId() == TYPEID_PLAYER)
+	 sScriptMgr->OnPlayerChangeShapeshift(target->ToPlayer(), form);
 
     if (apply)
     {

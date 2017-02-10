@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2017 StormCore
+ * Copyright (C) 2014-2017 StormCore (credits:zydrax)
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1968,6 +1968,8 @@ class TC_GAME_API Unit : public WorldObject
         void SetShapeshiftForm(ShapeshiftForm form);
 
         bool IsInFeralForm() const;
+		        bool IsInTravelForm() const;
+				bool IsTravelForm(ShapeshiftForm form) const;
 
         bool IsInDisallowedMountForm() const;
 

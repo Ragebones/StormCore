@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2017 StormCore
+ * Copyright (C) 2014-2017 StormCore (credits:zydrax)
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -2219,6 +2219,17 @@ void ScriptMgr::OnMovieComplete(Player* player, uint32 movieId)
     FOREACH_SCRIPT(PlayerScript)->OnMovieComplete(player, movieId);
 }
 
+
+void ScriptMgr::OnPlayerMovementUpdate(Player* player)
+{
+	FOREACH_SCRIPT(PlayerScript)->OnMovementUpdate(player);
+	}
+	
+	void ScriptMgr::OnPlayerChangeShapeshift(Player* player, ShapeshiftForm form)
+	{
+		FOREACH_SCRIPT(PlayerScript)->OnChangeShapeshift(player, form);
+		}
+	
 // Account
 void ScriptMgr::OnAccountLogin(uint32 accountId)
 {

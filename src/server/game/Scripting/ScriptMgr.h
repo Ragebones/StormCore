@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2014-2017 StormCore
+ * Copyright (C) 2014-2017 StormCore (credits:zydrax)
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -25,6 +26,7 @@
 #include "SharedDefines.h"
 #include "World.h"
 #include "Weather.h"
+#include "Unit.h"
 
 class AccountMgr;
 class AreaTrigger;
@@ -742,6 +744,12 @@ class TC_GAME_API PlayerScript : public UnitScript
 
         // Called when a player completes a movie
         virtual void OnMovieComplete(Player* /*player*/, uint32 /*movieId*/) { }
+		
+			     // Called when a player move
+		virtual void OnMovementUpdate(Player* /*player*/) { }
+		
+			     // Called when a player call shapeshift form
+		virtual void OnChangeShapeshift(Player* /*player*/, ShapeshiftForm /*form*/) { }
 };
 
 class TC_GAME_API AccountScript : public ScriptObject
@@ -1124,7 +1132,8 @@ class TC_GAME_API ScriptMgr
         void OnPlayerUpdateZone(Player* player, uint32 newZone, uint32 newArea);
         void OnQuestStatusChange(Player* player, uint32 questId, QuestStatus status);
         void OnMovieComplete(Player* player, uint32 movieId);
-
+		void OnPlayerMovementUpdate(Player* player);
+		void OnPlayerChangeShapeshift(Player* player, ShapeshiftForm form);
     public: /* AccountScript */
 
         void OnAccountLogin(uint32 accountId);

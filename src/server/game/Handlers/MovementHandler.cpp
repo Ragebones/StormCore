@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014-2017 StormCore
+ * Copyright (C) 2014-2017 StormCore (credits:zydrax)
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -32,6 +32,7 @@
 #include "Vehicle.h"
 #include "InstancePackets.h"
 #include "MovementPackets.h"
+#include "ScriptMgr.h"
 
 #define MOVEMENT_PACKET_TIME_DELAY 0
 
@@ -375,6 +376,10 @@ void WorldSession::HandleMovementOpcodes(WorldPackets::Movement::ClientPlayerMov
         plrMover->SetInWater(!plrMover->IsInWater() || plrMover->GetBaseMap()->IsUnderWater(movementInfo.pos.GetPositionX(), movementInfo.pos.GetPositionY(), movementInfo.pos.GetPositionZ()));
     }
 
+	
+	// called by playerscript for travel form
+	   sScriptMgr->OnPlayerMovementUpdate(plrMover);
+	   
     uint32 mstime = getMSTime();
     /*----------------------*/
     if (m_clientTimeDelay == 0)
