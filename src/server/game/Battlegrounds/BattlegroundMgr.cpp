@@ -36,6 +36,7 @@
 #include "BattlegroundTP.h"
 #include "BattlegroundTVA.h"
 #include "BattlegroundBFG.h"
+#include "BattlegroundTTP.h"
 #include "Map.h"
 #include "MapInstanced.h"
 #include "MapManager.h"
@@ -341,6 +342,9 @@ Battleground* BattlegroundMgr::CreateNewBattleground(BattlegroundTypeId original
         case BATTLEGROUND_BFG:
             bg = new BattlegroundBFG(*(BattlegroundBFG*)bg_template);
             break;
+        case BATTLEGROUND_TTP:
+            bg = new BattlegroundTTP(*(BattlegroundTTP*)bg_template);
+            break;			
         case BATTLEGROUND_RB:
         case BATTLEGROUND_AA:
         default:
@@ -443,6 +447,9 @@ bool BattlegroundMgr::CreateBattleground(BattlegroundTemplate const* bgTemplate)
             case BATTLEGROUND_BFG:
                 bg = new BattlegroundBFG;
                 break;
+            case BATTLEGROUND_TTP:
+                bg = new BattlegroundTTP;
+                break;				
             default:
                 return false;
         }
@@ -623,7 +630,8 @@ bool BattlegroundMgr::IsArenaType(BattlegroundTypeId bgTypeId)
             || bgTypeId == BATTLEGROUND_DS
             || bgTypeId == BATTLEGROUND_RV
             || bgTypeId == BATTLEGROUND_RL
-            || bgTypeId == BATTLEGROUND_TVA;
+            || bgTypeId == BATTLEGROUND_TVA
+            || bgTypeId == BATTLEGROUND_TTP;
 }
 
 BattlegroundQueueTypeId BattlegroundMgr::BGQueueTypeId(BattlegroundTypeId bgTypeId, uint8 arenaType)
@@ -655,6 +663,7 @@ BattlegroundQueueTypeId BattlegroundMgr::BGQueueTypeId(BattlegroundTypeId bgType
         case BATTLEGROUND_RL:
         case BATTLEGROUND_RV:
         case BATTLEGROUND_TVA:
+        case BATTLEGROUND_TTP:
             switch (arenaType)
             {
                 case ARENA_TYPE_2v2:
