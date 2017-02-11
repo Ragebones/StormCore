@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 StormCore
+ * Copyright (C) 2008-2017 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1168,7 +1168,6 @@ class spell_gen_creature_permanent_feign_death : public SpellScriptLoader
             {
                 Unit* target = GetTarget();
                 target->SetFlag(OBJECT_DYNAMIC_FLAGS, UNIT_DYNFLAG_DEAD);
-                target->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED);
                 target->SetFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_FEIGN_DEATH);
 
                 if (target->GetTypeId() == TYPEID_UNIT)
@@ -1628,6 +1627,57 @@ class spell_gen_elune_candle : public SpellScriptLoader
         {
             return new spell_gen_elune_candle_SpellScript();
         }
+};
+
+enum FishingSpells
+{
+    SPELL_FISHING_NO_FISHING_POLE   = 131476,
+    SPELL_FISHING_WITH_POLE         = 131490
+};
+
+// 131474 - Fishing
+class spell_gen_fishing : public SpellScriptLoader
+{
+public:
+    spell_gen_fishing() : SpellScriptLoader("spell_gen_fishing") { }
+
+    class spell_gen_fishing_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_gen_fishing_SpellScript);
+
+        bool Validate(SpellInfo const* /*spellInfo*/) override
+        {
+            return ValidateSpellInfo({ SPELL_FISHING_NO_FISHING_POLE, SPELL_FISHING_WITH_POLE });
+        }
+
+        bool Load() override
+        {
+            return GetCaster()->GetTypeId() == TYPEID_PLAYER;
+        }
+
+        void HandleDummy(SpellEffIndex effIndex)
+        {
+            PreventHitDefaultEffect(effIndex);
+            uint32 spellId;
+            Item* mainHand = GetCaster()->ToPlayer()->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND);
+            if (!mainHand || mainHand->GetTemplate()->GetClass() != ITEM_CLASS_WEAPON || mainHand->GetTemplate()->GetSubClass() != ITEM_SUBCLASS_WEAPON_FISHING_POLE)
+                spellId = SPELL_FISHING_NO_FISHING_POLE;
+            else
+                spellId = SPELL_FISHING_WITH_POLE;
+
+            GetCaster()->CastSpell(GetCaster(), spellId, false);
+        }
+
+        void Register() override
+        {
+            OnEffectHitTarget += SpellEffectFn(spell_gen_fishing_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
+        }
+    };
+
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_gen_fishing_SpellScript();
+    }
 };
 
 enum TransporterBackfires
@@ -4548,6 +4598,7 @@ void AddSC_generic_spell_scripts()
     new spell_gen_dummy_trigger();
     new spell_gen_dungeon_credit();
     new spell_gen_elune_candle();
+    new spell_gen_fishing();
     new spell_gen_gadgetzan_transporter_backfire();
     new spell_gen_gift_of_naaru();
     new spell_gen_gnomish_transporter();
