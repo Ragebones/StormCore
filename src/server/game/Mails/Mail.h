@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -93,6 +94,7 @@ class TC_GAME_API MailSender
         MailSender(AuctionEntry* sender);
         MailSender(BlackMarketEntry* sender);
         MailSender(Player* sender);
+        MailSender(uint32 senderEntry);
     public:                                                 // Accessors
         MailMessageType GetMailMessageType() const { return m_messageType; }
         ObjectGuid::LowType GetSenderId() const { return m_senderId; }
