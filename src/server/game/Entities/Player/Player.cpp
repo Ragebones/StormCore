@@ -15087,9 +15087,9 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     {
         /// @todo Poor design of mail system
         SQLTransaction trans = CharacterDatabase.BeginTransaction();
-        if (quest->GetRewMailSenderEntry() != 0)
+		if (uint32 questMailSender = quest->GetRewMailSenderEntry())
 			
-		MailDraft(mail_template_id).SendMailTo(trans, this, quest->GetRewMailSenderEntry(), MAIL_CHECK_MASK_HAS_BODY, quest->GetRewMailDelaySecs());
+			MailDraft(mail_template_id).SendMailTo(trans, this, questMailSender, MAIL_CHECK_MASK_HAS_BODY, quest->GetRewMailDelaySecs());
 		else
 			MailDraft(mail_template_id).SendMailTo(trans, this, questGiver, MAIL_CHECK_MASK_HAS_BODY, quest->GetRewMailDelaySecs());
         CharacterDatabase.CommitTransaction(trans);
