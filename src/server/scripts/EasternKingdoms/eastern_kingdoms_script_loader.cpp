@@ -183,6 +183,7 @@ void AddSC_blasted_lands();
 void AddSC_burning_steppes();
 void AddSC_duskwood();
 void AddSC_eastern_plaguelands();
+void AddSC_gilneas();
 void AddSC_ghostlands();
 void AddSC_hinterlands();
 void AddSC_isle_of_queldanas();
@@ -196,7 +197,6 @@ void AddSC_tol_barad();
 void AddSC_undercity();
 void AddSC_western_plaguelands();
 void AddSC_wetlands();
-void AddSC_gilneas();
 
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()
@@ -371,6 +371,7 @@ void AddEasternKingdomsScripts()
     AddSC_duskwood();
     AddSC_eastern_plaguelands();
     AddSC_ghostlands();
+    AddSC_gilneas();
     AddSC_hinterlands();
     AddSC_isle_of_queldanas();
     AddSC_redridge_mountains();
@@ -383,5 +384,4 @@ void AddEasternKingdomsScripts()
     AddSC_undercity();
     AddSC_western_plaguelands();
     AddSC_wetlands();
-    AddSC_gilneas();
 }
