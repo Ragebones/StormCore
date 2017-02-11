@@ -4,14 +4,14 @@
 StormCore ProjecT™ is a MMORPG Framework based mostly in C++.
 It is completely open source; community involvement is highly encouraged. 
 
-## Default Account: username: legion@legion password: legion@legion
+## Default Account: username: legion@legion password: legion
 ## Account creation command: .bnetaccount Create email password
 
 ## Repack Files (if someone don´t know to compile) We update it every day
-https://mega.nz/#!v9wj2bRb!dzPauSz3KAGHPNQc_Uqvkbn1z_-kS_AZPvER3BKYeZA
+https://mega.nz/#!31AiwDhY!ioWRejtoNYnNwAHBEwNNub1Dh9l8Hg6h4fi-rN1rhiU
 
 ## Full Database: We update it every day
-https://mega.nz/#!79JHkRgQ!EqFIYeSfgrGnSnHm2yPXffe17nl_HendqwqqIVMvYcc
+https://mega.nz/#!e4hEwCIQ!dr_hE-homwS1TgXaTI15JT8FE8vi-QcH6V7wn4AGiFQ
 
 ## Client for this source can be fount here:
 https://mega.nz/#!61YSUAqT!NEhx5EJqE5asf3IGRV23VgGOVraB8aQomn7u0sKH2ow

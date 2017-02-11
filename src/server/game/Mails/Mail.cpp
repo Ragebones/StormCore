@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -70,6 +71,13 @@ MailSender::MailSender(Player* sender)
     m_messageType = MAIL_NORMAL;
     m_stationery = sender->IsGameMaster() ? MAIL_STATIONERY_GM : MAIL_STATIONERY_DEFAULT;
     m_senderId = sender->GetGUID().GetCounter();
+}
+
+MailSender::MailSender(uint32 senderEntry)
+{
+    m_messageType = MAIL_CREATURE;
+    m_senderId = senderEntry;
+    m_stationery = MAIL_STATIONERY_DEFAULT;
 }
 
 MailReceiver::MailReceiver(Player* receiver) : m_receiver(receiver), m_receiver_lowguid(receiver->GetGUID().GetCounter()) { }
