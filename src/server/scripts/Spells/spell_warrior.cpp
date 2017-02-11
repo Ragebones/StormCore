@@ -64,6 +64,8 @@ enum WarriorSpells
 	SPELL_WARRIOR_UNRELENTING_ASSAULT_TRIGGER_2 = 64850,
 	SPELL_WARRIOR_VIGILANCE_PROC = 50725,
 	SPELL_WARRIOR_VENGEANCE = 76691,
+	SPELL_WARRIOR_VICTORIOUS       = 32216,
+	SPELL_WARRIOR_VICTORY_RUSH_HEAL                 = 118779,
 	SPELL_WARRIOR_HEROIC_LEAP_JUMP = 178368,
 	SPELL_WARRIOR_SHOCKWAVE                         = 46968,
     SPELL_WARRIOR_SHOCKWAVE_STUN                    = 132168,
@@ -910,32 +912,47 @@ public:
 	}
 };
 
-// 32216 - Victorious
-// 82368 - Victorious
-class spell_warr_victorious : public SpellScriptLoader
+// 34428 - Victory Rush
+class spell_warr_victory_rush : public SpellScriptLoader
+
 {
 public:
-	spell_warr_victorious() : SpellScriptLoader("spell_warr_victorious") { }
-
-	class spell_warr_victorious_AuraScript : public AuraScript
+    spell_warr_victory_rush() : SpellScriptLoader("spell_warr_victory_rush") { }
+	
+	class spell_warr_victory_rush_SpellScript : public SpellScript
 	{
-		PrepareAuraScript(spell_warr_victorious_AuraScript);
-
-		void HandleEffectProc(AuraEffect const* /*aurEff*/, ProcEventInfo& /*eventInfo*/)
+		PrepareSpellScript(spell_warr_victory_rush_SpellScript);
+		
+		bool Validate(SpellInfo const* /*spellInfo*/) override	
 		{
-			PreventDefaultAction();
-			GetTarget()->RemoveAura(GetId());
+			return ValidateSpellInfo
+			({
+				SPELL_WARRIOR_VICTORIOUS,
+				SPELL_WARRIOR_VICTORY_RUSH_HEAL
+			});
+		}
+		void HandleHeal()
+		{
+			if (!GetHitUnit())
+				return;
+			
+			Unit* caster = GetCaster();
+			
+			caster->CastSpell(caster, SPELL_WARRIOR_VICTORY_RUSH_HEAL, true);
+			caster->RemoveAurasDueToSpell(SPELL_WARRIOR_VICTORIOUS);
 		}
 
 		void Register() override
 		{
-			OnEffectProc += AuraEffectProcFn(spell_warr_victorious_AuraScript::HandleEffectProc, EFFECT_0, SPELL_AURA_DUMMY);
+			AfterCast += SpellCastFn(spell_warr_victory_rush_SpellScript::HandleHeal);
+			
 		}
 	};
+	
+	SpellScript* GetSpellScript() const override
 
-	AuraScript* GetAuraScript() const override
 	{
-		return new spell_warr_victorious_AuraScript();
+		return new spell_warr_victory_rush_SpellScript();		
 	}
 };
 
@@ -1232,7 +1249,7 @@ void AddSC_warrior_spell_scripts()
 	new spell_warr_sweeping_strikes();
 	new spell_warr_sword_and_board();
 	new spell_warr_trauma();
-	new spell_warr_victorious();
+	new spell_warr_victory_rush();
 	new spell_warr_vigilance();
 	new spell_warr_vigilance_trigger();
 	new spell_warr_heroic_leap();
