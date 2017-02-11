@@ -1,0 +1,4 @@
+# CMake generation dependency list for this directory.
+C:/Users/Adrian/Desktop/legionleaked/dep/boost/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-3.6/Modules/CheckCXXSourceCompiles.cmake
+C:/Users/Adrian/Desktop/legionleaked/cmake/macros/FindBoost.cmake

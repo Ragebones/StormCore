@@ -1,0 +1,9 @@
+# CMake generation dependency list for this directory.
+C:/Users/Adrian/Desktop/legionleaked/dep/threads/CMakeLists.txt
+C:/Program Files/CMake/share/cmake-3.6/Modules/FindThreads.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/CheckSymbolExists.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.6/Modules/CMakeParseArguments.cmake

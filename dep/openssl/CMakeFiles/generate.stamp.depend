@@ -1,0 +1,4 @@
+# CMake generation dependency list for this directory.
+C:/Users/Adrian/Desktop/legionleaked/dep/openssl/CMakeLists.txt
+C:/Users/Adrian/Desktop/legionleaked/cmake/macros/FindOpenSSL.cmake
+C:/Users/Adrian/Desktop/legionleaked/cmake/macros/EnsureVersion.cmake
