@@ -9111,17 +9111,6 @@ void Player::SendInitWorldStates(uint32 zoneid, uint32 areaid)
 				packet.Worldstates.emplace_back(0xE1A, 0x0);           // 9 show
 				}
 				break;
-		// The Tiger's Peak		
-            case 6732:
-            if (bg && bg->GetTypeID(true) == BATTLEGROUND_TTP)
-                bg->FillInitialWorldStates(packet);
-            else
-            {
-                packet.Worldstates.emplace_back(0xE10, 0x0);           // 7 gold
-                packet.Worldstates.emplace_back(0xE11, 0x0);           // 8 green
-                packet.Worldstates.emplace_back(0xE1A, 0x0);           // 9 show
-            }
-            break;					
         // Tol Barad Peninsula
         case 5389:
             if (sWorld->getBoolConfig(CONFIG_TOLBARAD_ENABLE))
@@ -14054,8 +14043,9 @@ void Player::PrepareGossipMenu(WorldObject* source, uint32 menuId /*= 0*/, bool 
                         TC_LOG_ERROR("sql.sql", "GOSSIP_OPTION_TRAINER:: Player %s (%s) request wrong gossip menu: %u with wrong class: %u at Creature: %s (Entry: %u, Trainer Class: %u)",
                             GetName().c_str(), GetGUID().ToString().c_str(), menu->GetGossipMenu().GetMenuId(), getClass(),
                             creature->GetName().c_str(), creature->GetEntry(), creature->GetCreatureTemplate()->trainer_class);
+						canTalk = false;
                     }
-                    // no break;
+                    break;
                 case GOSSIP_OPTION_GOSSIP:
                 case GOSSIP_OPTION_SPIRITGUIDE:
                 case GOSSIP_OPTION_INNKEEPER:
