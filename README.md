@@ -8,10 +8,10 @@ It is completely open source; community involvement is highly encouraged.
 ## Account creation command: .bnetaccount Create email password
 
 ## Repack Files (if someone don´t know to compile) We update it every day
-https://mega.nz/#!jghgGQoA!JD5NOU7f6VSE5LZDuBoOHUHjcpjK7MNKan4chKmdp90
+https://mega.nz/#!31AiwDhY!ioWRejtoNYnNwAHBEwNNub1Dh9l8Hg6h4fi-rN1rhiU
 
 ## Full Database: We update it every day
-https://mega.nz/#!fkABUSJK!aACidn9-xTLrBiG4fC_cNfQymqfPhbssazrWzFL57B8
+https://mega.nz/#!e4hEwCIQ!dr_hE-homwS1TgXaTI15JT8FE8vi-QcH6V7wn4AGiFQ
 
 ## Client for this source can be fount here:
 https://mega.nz/#!61YSUAqT!NEhx5EJqE5asf3IGRV23VgGOVraB8aQomn7u0sKH2ow
