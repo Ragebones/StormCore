@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -63,12 +64,11 @@ public:
         return GetInstanceAI<boss_gurtogg_bloodboilAI>(creature);
     }
 
-    struct boss_gurtogg_bloodboilAI : public ScriptedAI
+    struct boss_gurtogg_bloodboilAI : public BossAI
     {
-        boss_gurtogg_bloodboilAI(Creature* creature) : ScriptedAI(creature)
+        boss_gurtogg_bloodboilAI(Creature* creature) : BossAI(creature, DATA_GURTOGG_BLOODBOIL)
         {
             Initialize();
-            instance = creature->GetInstanceScript();
         }
 
         void Initialize()
@@ -90,8 +90,6 @@ public:
             Phase1 = true;
         }
 
-        InstanceScript* instance;
-
         ObjectGuid TargetGUID;
 
         float TargetThreat;
@@ -111,8 +109,7 @@ public:
 
         void Reset() override
         {
-            instance->SetBossState(DATA_GURTOGG_BLOODBOIL, NOT_STARTED);
-
+            _Reset();
             Initialize();
 
             me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, false);
@@ -121,9 +118,8 @@ public:
 
         void EnterCombat(Unit* /*who*/) override
         {
-            DoZoneInCombat();
             Talk(SAY_AGGRO);
-            instance->SetBossState(DATA_GURTOGG_BLOODBOIL, IN_PROGRESS);
+            _EnterCombat();
         }
 
         void KilledUnit(Unit* /*victim*/) override
@@ -133,9 +129,8 @@ public:
 
         void JustDied(Unit* /*killer*/) override
         {
-            instance->SetBossState(DATA_GURTOGG_BLOODBOIL, DONE);
-
             Talk(SAY_DEATH);
+            _JustDied();
         }
 
         void RevertThreatOnTarget(ObjectGuid guid)
