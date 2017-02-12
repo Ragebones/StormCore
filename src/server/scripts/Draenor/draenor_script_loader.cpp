@@ -17,6 +17,12 @@
 
 // This is where scripts' loading functions should be declared:
 	
+		//Instance Iron Docks #1 
+void AddSC_instance_iron_docks(); 
+void AddSC_iron_docks();
+void AddSC_boss_fleshrender_nokgar();
+void AddSC_boss_grimrail_enforcers();
+
 	//Zone Tanaan Jungle
 void AddSC_tanaan_jungle();
 
@@ -25,6 +31,12 @@ void AddSC_tanaan_jungle();
 // void Add${NameOfDirectory}Scripts()
 void AddDraenorScripts()
 {
+		// Iron Docks
+    AddSC_instance_iron_docks();
+    AddSC_iron_docks();
+    AddSC_boss_fleshrender_nokgar();
+    AddSC_boss_grimrail_enforcers();
+	
 	//Zone Tanaan Jungle
 	AddSC_tanaan_jungle();
 }
