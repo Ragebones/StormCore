@@ -1,19 +1,6 @@
-/*
- * Copyright (C) 2014-2017 StormCore
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+/* Copyright (C) 2014-2017 StormCore
+ * This program is free software licensed under GPL version 2
+ * Please see the included DOCS/LICENSE.TXT for more information */
 
 #ifndef DEF_CRUSADER_H
 #define DEF_CRUSADER_H
@@ -153,9 +140,9 @@ const Position AnubarakLoc[]=
 
 const Position EndSpawnLoc[]=
 {
-    {648.9167f, 131.0208f, 141.6161f, 0}, // 0 - Highlord Tirion Fordring
-    {649.1614f, 142.0399f, 141.3057f, 0}, // 1 - Argent Mage
-    {644.6250f, 149.2743f, 140.6015f, 0}  // 2 - Portal to Dalaran
+    {648.9167f, 131.0208f, 141.6161f, 0.f}, // 0 - Highlord Tirion Fordring
+    {649.1614f, 142.0399f, 141.3057f, 0.f}, // 1 - Argent Mage
+    {644.6250f, 149.2743f, 140.6015f, 5.f}  // 2 - Portal to Dalaran
 };
 
 enum TCRWorldStateIds

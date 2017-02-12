@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -313,7 +314,7 @@ class instance_trial_of_the_crusader : public InstanceMapScript
 
                                 if (tributeChest)
                                     if (Creature* tirion =  instance->GetCreature(TirionGUID))
-                                        if (GameObject* chest = tirion->SummonGameObject(tributeChest, 805.62f, 134.87f, 142.16f, 3.27f, 0, 0, 0, 0, WEEK))
+                                        if (GameObject* chest = tirion->SummonGameObject(tributeChest, 805.62f, 134.87f, 142.16f, 3.27f, G3D::Quat(), WEEK))
                                             chest->SetRespawnTime(chest->GetRespawnDelay());
                                 break;
                             }
