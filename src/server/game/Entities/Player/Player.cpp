@@ -5300,7 +5300,7 @@ bool Player::UpdateFishingSkill()
 
     uint32 SkillValue = GetPureSkillValue(SKILL_FISHING);
 
-    int32 chance = SkillValue < 75 ? 100 : 2500/(SkillValue-50);
+    int32 chance = std::min<uint32>(100, 100*100 / SkillValue);
 
     uint32 gathering_skill_gain = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
 
