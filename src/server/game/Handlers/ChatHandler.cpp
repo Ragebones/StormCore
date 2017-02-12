@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -204,8 +205,6 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
     switch (type)
     {
         case CHAT_MSG_SAY:
-        case CHAT_MSG_EMOTE:
-        case CHAT_MSG_YELL:
         {
             // Prevent cheating
             if (!sender->IsAlive())
@@ -217,12 +216,37 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
                 return;
             }
 
-            if (type == CHAT_MSG_SAY)
-                sender->Say(msg, Language(lang));
-            else if (type == CHAT_MSG_EMOTE)
-                sender->TextEmote(msg);
-            else if (type == CHAT_MSG_YELL)
-                sender->Yell(msg, Language(lang));
+            sender->Say(msg, Language(lang));
+            break;
+        }
+        case CHAT_MSG_EMOTE:
+        {
+            // Prevent cheating
+            if (!sender->IsAlive())
+                return;
+
+            if (sender->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_EMOTE_LEVEL_REQ))
+            {
+                SendNotification(GetTrinityString(LANG_SAY_REQ), sWorld->getIntConfig(CONFIG_CHAT_EMOTE_LEVEL_REQ));
+                return;
+            }
+
+            sender->TextEmote(msg);
+            break;
+        }
+        case CHAT_MSG_YELL:
+        {
+            // Prevent cheating
+            if (!sender->IsAlive())
+                return;
+
+            if (sender->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_YELL_LEVEL_REQ))
+            {
+                SendNotification(GetTrinityString(LANG_SAY_REQ), sWorld->getIntConfig(CONFIG_CHAT_YELL_LEVEL_REQ));
+                return;
+            }
+
+            sender->Yell(msg, Language(lang));
             break;
         }
         case CHAT_MSG_WHISPER:
