@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -821,34 +822,39 @@ public:
 /*######
 ## go_soulwell
 ######*/
+enum SoulWellData
+{
+    SPELL_WARLOCK_CREATE_HEALTHSTONE = 23517,
+    ITEM_HEALTHSTONE = 5512
+};
 
 class go_soulwell : public GameObjectScript
 {
-    public:
-        go_soulwell() : GameObjectScript("go_soulwell") { }
+public:
+    go_soulwell() : GameObjectScript("go_soulwell") { }
 
-        struct go_soulwellAI : public GameObjectAI
+    bool OnGossipHello(Player* player, GameObject* go) override
+    {
+        Unit* owner = go->GetOwner();
+       
+        if (!owner || owner->GetTypeId() != TYPEID_PLAYER || !player->IsInSameRaidWith(owner->ToPlayer()))
+            return true;
+
+        // Don't try to add a stone if we already have one.
+        if (player->HasItemCount(ITEM_HEALTHSTONE))
         {
-            go_soulwellAI(GameObject* go) : GameObjectAI(go)
+            if (SpellInfo const* spell = sSpellMgr->GetSpellInfo(SPELL_WARLOCK_CREATE_HEALTHSTONE))
             {
+                ObjectGuid castId = ObjectGuid::Create<HighGuid::Cast>(SPELL_CAST_SOURCE_NORMAL, player->GetMapId(), SPELL_WARLOCK_CREATE_HEALTHSTONE, player->GetMap()->GenerateLowGuid<HighGuid::Cast>());
+                Spell::SendCastResult(player, spell, NULL, castId, SPELL_FAILED_TOO_MANY_OF_ITEM);
             }
-
-            bool GossipHello(Player* player, bool isUse) override
-            {
-                if (!isUse)
-                    return true;
-
-                Unit* owner = go->GetOwner();
-                if (!owner || owner->GetTypeId() != TYPEID_PLAYER || !player->IsInSameRaidWith(owner->ToPlayer()))
-                    return true;
-                return false;
-            }
-        };
-
-        GameObjectAI* GetAI(GameObject* go) const override
-        {
-            return new go_soulwellAI(go);
+            return true;
         }
+
+        player->CastSpell(player, SPELL_WARLOCK_CREATE_HEALTHSTONE, true);
+
+        return false;
+    }
 };
 
 /*######
