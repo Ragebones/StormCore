@@ -1278,7 +1278,7 @@ FeatureSystem.CharacterUndelete.Cooldown = 2592000
 #                     4  - (Enable world only)
 #                     0  - (All Disabled)
 
-Updates.EnableDatabases = 15
+Updates.EnableDatabases = 0
 
 #
 #    Updates.AutoSetup
