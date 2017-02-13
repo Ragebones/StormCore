@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -357,14 +358,34 @@ class TC_GAME_API BossAI : public ScriptedAI
         void JustReachedHome() override { _JustReachedHome(); }
 
         bool CanAIAttack(Unit const* target) const override { return CheckBoundary(target); }
+        bool CanRespawn() override;
 
     protected:
         void _Reset();
         void _EnterCombat();
         void _JustDied();
         void _JustReachedHome() { me->setActive(false); }
-        void _DespawnAtEvade(uint32 delayToRespawn = 30,  Creature* who = nullptr);
-		void _DespawnAtEvade(Seconds const& time, Creature* who = nullptr) { _DespawnAtEvade(uint32(time.count()), who); }
+        void _DespawnAtEvade(uint32 delayToRespawn = 30, Creature* who = nullptr);
+        void _DespawnAtEvade(Seconds const& time, Creature* who = nullptr) { _DespawnAtEvade(uint32(time.count()), who); }
+
+        bool CheckInArea(uint32 const diff, uint32 areaId)
+        {
+            if (m_CheckAreaTimer <= diff)
+                m_CheckAreaTimer = 3 * TimeConstants::IN_MILLISECONDS;
+            else
+            {
+                m_CheckAreaTimer -= diff;
+                return true;
+            }
+
+            if (me->GetAreaId() != areaId)
+            {
+                EnterEvadeMode();
+                return false;
+            }
+
+            return true;
+        }
 
         void TeleportCheaters();
 
@@ -374,6 +395,7 @@ class TC_GAME_API BossAI : public ScriptedAI
 
     private:
         uint32 const _bossId;
+        uint32 m_CheckAreaTimer;
 };
 
 class TC_GAME_API WorldBossAI : public ScriptedAI

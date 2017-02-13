@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014-2017 StormCore
+ * 
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -451,6 +452,8 @@ BossAI::BossAI(Creature* creature, uint32 bossId) : ScriptedAI(creature),
     {
         return !me->HasUnitState(UNIT_STATE_CASTING);
     });
+
+    m_CheckAreaTimer = 1 * TimeConstants::IN_MILLISECONDS;
 }
 
 void BossAI::_Reset()
@@ -493,6 +496,14 @@ void BossAI::_EnterCombat()
     me->setActive(true);
     DoZoneInCombat();
     ScheduleTasks();
+}
+
+bool BossAI::CanRespawn()
+{
+    if (instance && instance->GetBossState(_bossId) == DONE)
+        return false;
+
+    return true;
 }
 
 void BossAI::TeleportCheaters()
