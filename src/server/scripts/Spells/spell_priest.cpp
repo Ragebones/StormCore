@@ -1372,7 +1372,7 @@ class spell_pri_surge_of_light_aura : public SpellScriptLoader
                     if (pl_player->GetUInt32Value(PLAYER_FIELD_CURRENT_SPEC_ID) == TALENT_SPEC_PRIEST_SHADOW)
                         return;
 
-                    if (roll_chance_i(GetSpellInfo()->GetEffect(EFFECT_0)->BasePoints))
+                    if (roll_chance_i(GetSpellInfo()->GetEffect(EFFECT_0)->CalcValue()))
                     {
                         if (Aura* pl_SurgeOfLight = pl_player->GetAura(SPELL_PRIEST_SURGE_OF_LIGHT))
                         {
