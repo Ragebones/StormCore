@@ -220,6 +220,8 @@ class TC_GAME_API InstanceScript : public ZoneScript
 
         // Cast spell on all players in instance
         void DoCastSpellOnPlayers(uint32 spell);
+		
+		void DoStartMovie(uint32 movieId);
 
         // Return wether server allow two side groups or not
         bool ServerAllowsTwoSideGroups() { return sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GROUP); }

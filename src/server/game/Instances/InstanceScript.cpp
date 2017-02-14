@@ -610,6 +610,19 @@ bool InstanceScript::CheckAchievementCriteriaMeet(uint32 criteria_id, Player con
     return false;
 }
 
+void InstanceScript::DoStartMovie(uint32 movieId)
+{
+    Map::PlayerList const &PlayerList = instance->GetPlayers();
+    if (!PlayerList.isEmpty())
+    {
+        for (Map::PlayerList::const_iterator iter = PlayerList.begin(); iter != PlayerList.end(); ++iter)
+        {
+            if (Player* player = iter->GetSource())
+                player->SendMovieStart(movieId);
+        }
+    }
+}
+
 void InstanceScript::SetEntranceLocation(uint32 worldSafeLocationId)
 {
     _entranceId = worldSafeLocationId;
