@@ -110,7 +110,7 @@ public:
 			return true;
 		}
 		
-		void HandleEffectProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+		void HandleEffectProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
 		{
 			PreventDefaultAction();
 			if (Unit* caster = GetCaster())
