@@ -15,102 +15,254 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "ObjectMgr.h"
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
-#include "auchindoun.h"
+#include "PassiveAI.h"
+#include "SpellScript.h"
+#include "MoveSplineInit.h"
+#include "Cell.h"
+#include "CellImpl.h"
+#include "GridNotifiers.h"
+#include "GridNotifiersImpl.h"
+#include "Auchindoun.h"
 
-enum eAzzakelSpells
+enum spells
 {
-    SpellClawsOfArgusBuff            = 153762,
-    SpellClawsOfArgusVisual          = 153764,
-    SpellClawsOfArgusDmg             = 153772,
-    SpellCurtainOfFlameAura          = 153392,
-    SpellCurtainOfFlameForceCast     = 153396,
-    SpellCurtainOfFlameVisual        = 153400,
-    SpellFelLashVisual               = 153234,
-    SpellFelLashDummy                = 174872,
-    SpellFelLashDebuff               = 177120,
-    SpellFelLashDebuffTwo            = 177121,
-    SpellMalevilentCrush             = 153499,
-    SpellFelPoolAreatriger           = 153500, 
-    SpellFelPoolDebuffDmg            = 153616,
-    SpellVisualFelBurst              = 169682,
-    SpellFelSparkAreaTrigger         = 153725,
-    SpellFelSparkDamage              = 153726,
-    SpellFelSparkPerioidicCreation   = 153727,
-    SpellSummonImp                   = 153775,
-    SpellFelGuard                    = 164080,
-    SpellSummonPyromaniac            = 164127,
-    SpellFly                         = 161778
+    SPELL_FEAL_LASH = 153234,
+    SPELL_CURTAIN_OF_FLAME = 153396,
+    SPELL_ARGUS = 153764
 };
 
-enum eAzzakelTalks
+enum npc
 {
-    AzzakelIntro   = 37,  ///< Who Dares Meddlie In The Works Of The Legion?! (46776) 
-    AzzakelAggro   = 38,  ///< This World...All World...Shell Burn!(46774)
-    AzzakelSpell03 = 39,  ///< Die, Insect!(46781)
-    AzzakelSpell02 = 40,  ///< Burn In The Master'S Fire!(46780)
-    AzzakelSpell01 = 41,  ///< Come Forth, Servants!(46779)
-    AzzakelKill01  = 42,  ///< The Masters Blase Your Soul! (46777)
-    AzzakelKill02  = 43,  ///< Burn! (46778)
-    AzzakelDeath   = 44   ///< (46775)
+    NPC_FIREMAN = 79510,
+    NPC_BLAZING_ROGUE = 79511,
+    NPC_FELGUARDIAN = 76259,
+    NPC_AZZAKEL_TRIGGER = 100102
 };
 
-enum eAzzakelCreatures
+enum spells_of_npc
 {
-    TriggerFelPool             = 326526,
-    TriggerFelSpark            = 326527,
-    TriggerDemonSummoning      = 432636,
-    CreatureFelguard           = 76259,
-    CreatureCacklingPyromaniac = 76260,
-    CreatureBlazingTrickster   = 79511,
-    CreatureBlazingTrickster02 = 76220
+    SPELL_FEL_DETONATE = 167092,
+    SPELL_IGNITION = 154018,
+    SPELL_FEL_TREAD = 157173
 };
 
-enum eAzzakelActions
+enum events
 {
-    ActionFelSpark  = 1,
-    ActionSummonDemons,
-    ActionRenewEvents,
-    ActionBoolActivate,
-    ActionBoolDeactivate,
-    ActionMalevolentCrash
+    EVENT_FEAL_LASH = 1,
+    EVENT_CURTAIN_OF_FLAME = 2,
+    EVENT_FLYPHASE = 3,
+    EVENT_BACK = 4,
+    EVENT_FEL_POOl = 5
 };
 
-enum eAzzakelMovements
+enum points
 {
-    MovementAzzakelMalevolentCrash = 2
+    POINT_AIR = 0,
+    POINT_GROUND = 1
+};
+Position const Flypost = { 1949.93f, 2721.15f, 56.16f, 0.0f };
+Position const Landpost = { 1926.27f, 2723.02f, 30.79f, 0.0f };
+#define count 3
+Position const Summ_pos [count] = 
+{
+    {1907.84f,2749.25f,30.80f,4.6f},
+    {1883.98f,2726.08f,30.79f,6.15f},
+    {1905.36f,2699.54f,30.79f,1.43f}
+};
+class boss_azakel : public CreatureScript
+{
+public:
+    boss_azakel() : CreatureScript("boss_azakel") {}
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return GetInstanceAI<boss_azakelAI>(creature);
+    }
+
+    struct boss_azakelAI : public BossAI
+    {
+        boss_azakelAI(Creature* creature) : BossAI(creature, BOSS_AZAKEL)
+        {
+            me->SetModifierValue(UNIT_MOD_ATTACK_POWER, BASE_VALUE, float(400));
+            me->UpdateAttackPowerAndDamage();
+        }
+
+        void Reset() override
+        {
+            _Reset();
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            DemonicPortal(false);
+            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+            me->SetReactState(REACT_AGGRESSIVE);
+        }
+
+        void EnterCombat(Unit* /*who*/) override
+        {
+            _EnterCombat();
+            DemonicPortal(true);
+            _MainActions();
+        }
+
+        void _summon()
+        {
+            me->SummonCreature(NPC_FELGUARDIAN,Summ_pos[0],TEMPSUMMON_CORPSE_DESPAWN,0);
+            me->SummonCreature(NPC_FIREMAN, Summ_pos[1], TEMPSUMMON_CORPSE_DESPAWN, 0);
+            me->SummonCreature(NPC_BLAZING_ROGUE, Summ_pos[2], TEMPSUMMON_CORPSE_DESPAWN, 0);
+        }
+
+        void MovementInform(uint32 type, uint32 id) override
+        {
+            switch (id)
+            {
+            case POINT_AIR:
+                events.ScheduleEvent(EVENT_BACK, 9500);
+                DoCastAOE(SPELL_ARGUS);
+                _summon();
+                break;
+            case POINT_GROUND:
+                events.Reset();
+                me->SetCanFly(false);
+                me->SetDisableGravity(false);
+                _MainActions();
+                events.ScheduleEvent(EVENT_FEL_POOl, 1000);
+                break;
+            default:
+                break;
+            }
+        }
+        void _MainActions()
+        {
+            me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+            me->SetReactState(REACT_AGGRESSIVE);
+            events.ScheduleEvent(EVENT_FEAL_LASH, 2000);
+            events.ScheduleEvent(EVENT_CURTAIN_OF_FLAME, 4000);
+            events.ScheduleEvent(EVENT_FLYPHASE, 30000);
+        }
+
+        void JustDied(Unit* /*killer*/) override
+        {
+            _JustDied();
+            DemonicPortal(false);
+        }
+
+        void DemonicPortal(bool state)
+        {
+            switch (state)
+            {
+            case true:
+                if (GameObject*  gameobject = me->SummonGameObject(OBJECT_Fel_barier, 1911.64f, 2722.51f, 31.57f, 3.14f, 0, 0, 0, 0, 0))
+                    FelBarier = gameobject->GetGUID();
+                if (GameObject*  gameobject = me->SummonGameObject(OBJECT_DemonicPortal, 1911.64f, 2722.51f, 31.57f, 3.14f, 0, 0, 0, 0, 0))
+                    DemonPortal = gameobject->GetGUID();
+                break;
+            case false:
+                if (GameObject* gameobject = ObjectAccessor::GetGameObject(*me, FelBarier))
+                    gameobject->Delete();
+                if (GameObject* gameobject = ObjectAccessor::GetGameObject(*me, DemonPortal))
+                    gameobject->Delete();
+                break;
+            }
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            if (!UpdateVictim())
+                return;
+            events.Update(diff);
+            if (me->HasUnitState(UNIT_STATE_CASTING))
+                return;
+            while (uint32 eventId = events.ExecuteEvent())
+            {
+                switch (eventId)
+                {
+                case EVENT_FEAL_LASH:
+                    DoCast(SelectTarget(SELECT_TARGET_TOPAGGRO), SPELL_FEAL_LASH);
+                    events.ScheduleEvent(EVENT_FEAL_LASH, 6000);
+                    break;
+                case EVENT_CURTAIN_OF_FLAME:
+                    DoCast(SelectTarget(SELECT_TARGET_RANDOM), SPELL_CURTAIN_OF_FLAME);
+                    events.ScheduleEvent(EVENT_CURTAIN_OF_FLAME, 8000);
+                    break;
+                case EVENT_FLYPHASE:
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+                    me->SetCanFly(true);
+                    me->SetDisableGravity(true);
+                    me->GetMotionMaster()->MovePoint(POINT_AIR,Flypost);
+                    break;
+                case EVENT_BACK:
+                    me->GetMotionMaster()->MovePoint(POINT_GROUND, Landpost);
+                    break;
+                case EVENT_FEL_POOl:
+                    for (uint32 i = 0; i < 2; i++)
+                        if (Unit* player = me->SelectNearestPlayer(50.0f))
+                            me->SummonCreature(NPC_AZZAKEL_TRIGGER, player->GetPositionX(), player->GetPositionY(), player->GetPositionZ(), player->GetOrientation(), TEMPSUMMON_CORPSE_DESPAWN, 0);
+                    events.ScheduleEvent(EVENT_FEL_POOl, 10000);
+                    break;
+                default:
+                    break;
+                }
+            }
+            DoMeleeAttackIfReady();
+        }
+    private: 
+        ObjectGuid DemonPortal;
+        ObjectGuid FelBarier;
+    };
 };
 
-Position const g_PositionAzzakel_Blackgate = { 1929.65f, 2699.27f, 30.799f, 4.428220f };
-
-Position const g_PositionSpawningFlyCoords[2] =
+enum spells_dummy
 {
-    { 1912.13f, 2720.44f, 49.818f, 1.600908f },
-    { 1911.65f, 2757.73f, 30.799f, 4.748000f }
+    SPELL_TRIGGER = 183142,
+    SPELL_AURA = 153726
 };
 
-Position const g_PositionAzzakelBlackgateLittle[4] =
+class Azzakel_trigger : public CreatureScript
 {
-    { 1911.90f, 2680.62f, 31.418f, 1.450705f },
-    { 1911.79f, 2764.35f, 31.418f, 4.721891f },
-    { 1953.55f, 2722.47f, 31.418f, 3.139304f },
-    { 1869.70f, 2722.45f, 31.418f, 0.001632f }
+public:
+    Azzakel_trigger() : CreatureScript("Azzakel_trigger") {}
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return GetInstanceAI<Azzakel_triggerAI>(creature);
+    }
+
+    struct Azzakel_triggerAI : public ScriptedAI
+    {
+        Azzakel_triggerAI(Creature* creature) : ScriptedAI(creature)
+        {
+
+        }
+        EventMap events;
+
+        void IsSummonedBy(Unit* summoner)
+        {
+            DoCast(me, SPELL_TRIGGER);
+            me->DespawnOrUnsummon(15000);
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            events.Update(diff);
+            if (Unit* nearPlayer = me->SelectNearestPlayer(3.0f))
+                if (!nearPlayer->HasAura(SPELL_AURA))
+                    nearPlayer->AddAura(SPELL_AURA, nearPlayer);
+            if (Unit* nearPlayer = me->SelectNearestPlayer(6.0f))
+                if (nearPlayer->GetDistance2d(me) > 3)
+                    nearPlayer->RemoveAura(SPELL_AURA);
+        }
+    };
 };
 
-static void HandleDoors(Unit* p_Me)
+void AddSC_boss_azakel()
 {
-    std::list<GameObject*> l_ListGameObjects;
-	p_Me->GetGameObjectListWithEntryInGrid(l_ListGameObjects, eAuchindounObjects::GameobjectFelBarrier, 100.0f);
-    if (l_ListGameObjects.empty())
-        return;
+    new boss_azakel();
+    new Azzakel_trigger();
 
-    for (GameObject* l_Itr : l_ListGameObjects)
-        l_Itr->Delete();
-}
-
-
-void AddSC_boss_azzakel()
-{
-    
 }
