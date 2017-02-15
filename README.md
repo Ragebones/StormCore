@@ -19,7 +19,7 @@ https://mega.nz/#!61YSUAqT!NEhx5EJqE5asf3IGRV23VgGOVraB8aQomn7u0sKH2ow
 ## Dbc, Maps, Mmaps and Vmaps can be found here:
 https://mega.nz/#!DkJHySQJ!Wq6D0Wzp7D9aNB6uFF2_z2VdYH8Rz_bufmpt2iGpBXE
 
-##Join to our Discord Channel.
+##Join to our Discord Channel
 https://discordapp.com/invite/SwnzZWv
 
 ##Report Issues
