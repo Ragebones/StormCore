@@ -1,23 +1,25 @@
 /*
  * Copyright (C) 2014-2017 StormCore
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #include "MoveSpline.h"
 #include "Log.h"
 #include "Creature.h"
+#include "DB2Stores.h"
 
 #include <sstream>
 
@@ -27,10 +29,16 @@ Location MoveSpline::ComputePosition() const
 {
     ASSERT(Initialized());
 
-    float u = 1.f;
+    float u = 1.0f;
+    float u2 = 1.0f;
     int32 seg_time = spline.length(point_Idx, point_Idx+1);
     if (seg_time > 0)
+    {
         u = (time_passed - spline.length(point_Idx)) / (float)seg_time;
+        u2 = u;
+        if (spell_effect_extra && spell_effect_extra->ProgressCurveId)
+            u = sDB2Manager.GetCurveValueAt(spell_effect_extra->ProgressCurveId, u);
+    }
     Location c;
     c.orientation = initialOrientation;
     spline.evaluate_percent(point_Idx, u, c);
@@ -38,7 +46,7 @@ Location MoveSpline::ComputePosition() const
     if (splineflags.animation)
         ;// MoveSplineFlag::Animation disables falling or parabolic movement
     else if (splineflags.parabolic)
-        computeParabolicElevation(c.z);
+        computeParabolicElevation(c.z, u2 /*progress without curve modifer is expected here*/);
     else if (splineflags.falling)
         computeFallElevation(c.z);
 
@@ -65,12 +73,14 @@ Location MoveSpline::ComputePosition() const
     return c;
 }
 
-void MoveSpline::computeParabolicElevation(float& el) const
+void MoveSpline::computeParabolicElevation(float& el, float u) const
 {
     if (time_passed > effect_start_time)
     {
         float t_passedf = MSToSec(time_passed - effect_start_time);
         float t_durationf = MSToSec(Duration() - effect_start_time); //client use not modified duration here
+        if (spell_effect_extra && spell_effect_extra->ParabolicCurveId)
+            t_passedf *= sDB2Manager.GetCurveValueAt(spell_effect_extra->ParabolicCurveId, u);
 
         // -a*x*x + bx + c:
         //(dur * v3->z_acceleration * dt)/2 - (v3->z_acceleration * dt * dt)/2 + Z;
@@ -164,6 +174,7 @@ void MoveSpline::Initialize(MoveSplineInitArgs const& args)
     time_passed = 0;
     vertical_acceleration = 0.f;
     effect_start_time = 0;
+    spell_effect_extra = args.spellEffectExtra;
     splineIsFacingOnly = args.path.size() == 2 && args.facing.type != MONSTER_MOVE_NORMAL && ((args.path[1] - args.path[0]).length() < 0.1f);
 
     // Check if its a stop spline
@@ -206,9 +217,14 @@ bool MoveSplineInitArgs::Validate(Unit* unit) const
         return false;\
     }
     CHECK(path.size() > 1);
-    CHECK(velocity > 0.1f);
+    CHECK(velocity > 0.01f);
     CHECK(time_perc >= 0.f && time_perc <= 1.f);
     CHECK(_checkPathLengths());
+    if (spellEffectExtra)
+    {
+        CHECK(!spellEffectExtra->ProgressCurveId || sCurveStore.LookupEntry(spellEffectExtra->ProgressCurveId));
+        CHECK(!spellEffectExtra->ParabolicCurveId || sCurveStore.LookupEntry(spellEffectExtra->ParabolicCurveId));
+    }
     return true;
 #undef CHECK
 }

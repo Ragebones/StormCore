@@ -1,18 +1,19 @@
 /*
  * Copyright (C) 2014-2017 StormCore
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifndef TRINITYSERVER_MOVESPLINEINIT_ARGS_H
@@ -39,6 +40,14 @@ namespace Movement
         FacingInfo() : angle(0.0f), type(MONSTER_MOVE_NORMAL) { }
     };
 
+    struct SpellEffectExtraData
+    {
+        ObjectGuid Target;
+        uint32 SpellVisualId = 0;
+        uint32 ProgressCurveId = 0;
+        uint32 ParabolicCurveId = 0;
+    };
+
     struct MoveSplineInitArgs
     {
         MoveSplineInitArgs(size_t path_capacity = 16) : path_Idx_offset(0), velocity(0.f),
@@ -57,6 +66,7 @@ namespace Movement
         float time_perc;
         uint32 splineId;
         float initialOrientation;
+        Optional<SpellEffectExtraData> spellEffectExtra;
         bool HasVelocity;
         bool TransformForTransport;
 
