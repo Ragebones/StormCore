@@ -124,6 +124,7 @@ class spell_dh_fel_rush : public SpellScriptLoader
         }
 };
 
+
 // 197923 - Fel Rush (air cast)
 class spell_dh_fel_rush_aura : public SpellScriptLoader
 {
@@ -171,7 +172,7 @@ public:
         void HandleEffectProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
         {
             if (Unit* caster = GetCaster())
-                caster->CastSpell(caster->GetVictim(), SPELL_DEMON_BLADES_PROC, true);
+                caster->CastCustomSpell(SPELL_DEMON_BLADES_PROC, SPELLVALUE_BASE_POINT0, aurEff->GetBaseAmount(), caster);
         }
 
         void Register() override
