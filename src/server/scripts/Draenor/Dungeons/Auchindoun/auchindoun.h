@@ -417,7 +417,7 @@ enum eAuchindounTalks
     TUULANITALK15         = 15, ///< Here.. this is not enough to thank you for your actions, but it is what we have to give. (44651)
     TUULANITALK16         = 16, ///< Now we can rebuild, we must rebuild. We'll never allow our souls to fall to the legion. (44652)
     TUULANITALK17         = 17, ///< You have done more then you know, our people can never thank you enough. (44653)
-    TUULANITALK18 = 18,         ///< Let us proceed (44657)
+    TUULANITALK18         = 18,         ///< Let us proceed (44657)
     NYAMITALK1            = 21, ///< Yes Tuulani, now you see. (43638)
     NYAMITALK2            = 22, ///< Your efforts were valiant, I did not think the Encorai could powered the defences with only one of the Crystals. (43639)
     NYAMITALK3            = 23, ///< But nothing will stop my plan, nor that of my master's.. and the only thing that's on our way.. (43630)
