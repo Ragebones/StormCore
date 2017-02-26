@@ -19,6 +19,9 @@
 #ifndef SC_GOSSIP_H
 #define SC_GOSSIP_H
 
+#include "GossipDef.h"
+#include "QuestDef.h"
+
 #include "Define.h"
 #include <string>
 
@@ -85,6 +88,28 @@ enum eTradeskill
     GOSSIP_SENDER_SEC_MAILBOX           = 9,
     GOSSIP_SENDER_SEC_STABLEMASTER      = 10
 };
+
+// Defined fuctions to use with player.
+
+// This fuction add's a menu item,
+// a - Icon Id
+// b - Text
+// c - Sender(this is to identify the current Menu with this item)
+// d - Action (identifys this Menu Item)
+// e - Text to be displayed in pop up box
+// f - Money value in pop up box
+// g - Coded
+// h - Menu ID from DB
+// i - Menu item ID from DB
+#define ADD_GOSSIP_ITEM(a, b, c, d)   PlayerTalkClass->GetGossipMenu().AddMenuItem(-1, a, b, c, d, "", 0)
+#define ADD_GOSSIP_ITEM_DB(h, i, c, d)   PlayerTalkClass->GetGossipMenu().AddMenuItem(h, i, c, d)
+#define ADD_GOSSIP_ITEM_EXTENDED(a, b, c, d, e, f, g)   PlayerTalkClass->GetGossipMenu().AddMenuItem(-1, a, b, c, d, e, f, g)
+
+// This fuction Sends the current menu to show to client, a - NPCTEXTID(uint32), b - npc guid(uint64)
+#define SEND_GOSSIP_MENU(a, b)      PlayerTalkClass->SendGossipMenu(a, b)
+
+// Closes the Menu
+#define CLOSE_GOSSIP_MENU()        PlayerTalkClass->SendCloseGossip()
 
 void TC_GAME_API ClearGossipMenuFor(Player* player);
 // Using provided text, not from DB
